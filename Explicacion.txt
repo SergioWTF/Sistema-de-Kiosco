@@ -1,0 +1,7 @@
+Clases: Kiosco,Productos,
+Productos -> Kiosco 
+
+Productos -> Codigo de producto, Nombre, Precio, Stock
+
+Kiosco -> Nombre, ID, Direccion.
+

@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1698364104 source:d:\facultad\laboratorio ii\proyecto final\kiosco.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<cstring>
+	"Kiosco.h"
+
+1698363696 d:\facultad\laboratorio ii\proyecto final\kiosco.h
+
+1698363957 source:d:\facultad\laboratorio ii\proyecto final\main.cpp
+	<iostream>
+	"Kiosco.h"
+
+1697741858 source:d:\facultad\laboratorio ii\proyecto final\src\producto.cpp
+	<iostream>
+	<cstdlib>
+	"Producto.h"
+
+1697739677 d:\facultad\laboratorio ii\proyecto final\include\producto.h
+	<Kiosco.h>
+
