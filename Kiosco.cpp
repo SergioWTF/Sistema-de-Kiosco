@@ -26,12 +26,15 @@ void Kiosco::cargar()
     cargarCadena(_nombre,29);
     cout<<"Ingrese direccion del kiosco: ";
     cargarCadena(_direccion,29);
+    cout<<"Ingrese codigo de kiosco: ";
+    cargarCadena(_codigo,29);
 }
 
 void Kiosco::mostrar()
 {
     cout<<"Kiosco: "<<_nombre<<endl;
     cout<<"Direccion: "<<_direccion<<endl;
+    cout<<"Codigo: "<<_codigo<<endl;
 }
 
 bool Kiosco::crear(){
@@ -47,14 +50,26 @@ bool Kiosco::crear(){
 	return true;
 }
 
-bool Kiosco::modificar(Kiosco kiosco, int pos){
-    FILE *pKiosco;
-    pKiosco=fopen("kiosco.dat", "rb+");
-    if(pKiosco==NULL){
+bool Kiosco::modificar(const char* codigoKiosco) {
+    FILE* pKiosco;
+    pKiosco = fopen("kiosco.dat", "rb+");
+    if (pKiosco == NULL) {
         return false;
     }
-    fseek(pKiosco,sizeof kiosco*pos,0);
-    bool kioscoModificado=fwrite(&kiosco,sizeof kiosco,1,pKiosco);
+
+    int pos = buscarCodigo(codigoKiosco);
+
+    if (pos == -1) {
+        cout << "Kiosco no encontrado." << endl;
+        fclose(pKiosco);
+        return false;
+    }
+
+    Kiosco kiosco;
+    fseek(pKiosco, pos * sizeof(Kiosco), 0);
+    kiosco.cargar();
+
+    bool kioscoModificado = fwrite(&kiosco, sizeof(Kiosco), 1, pKiosco);
     fclose(pKiosco);
     return kioscoModificado;
 }
@@ -102,7 +117,35 @@ bool Kiosco::listarPorNombre(const char* nombre) {
     return encontrado;
 }
 
-void Kiosco::eliminar(){
+bool Kiosco::eliminar(const char* codigoKiosco) {
+    FILE* pKiosco;
+    pKiosco = fopen("kiosco.dat", "rb+");
+    if (pKiosco == NULL) {
+        return false;
+    }
+
+    int pos = buscarCodigo(codigoKiosco);
+
+    if (pos == -1) {
+        cout << "Kiosco no encontrado." << endl;
+        fclose(pKiosco);
+        return false;
+    }
+
+    fseek(pKiosco, pos * sizeof(Kiosco), 0);
+
+    Kiosco kiosco;
+
+    bool kioscoEliminado = fwrite(&kiosco, sizeof(Kiosco), 1, pKiosco);
+    fclose(pKiosco);
+
+    if (kioscoEliminado) {
+        cout << "Kiosco eliminado correctamente." << endl;
+        return true;
+    } else {
+        cout << "Error al eliminar el kiosco." << endl;
+        return false;
+    }
 }
 
 Kiosco::Kiosco(){
@@ -119,16 +162,16 @@ void Kiosco::cargarCadena(char *palabra, int tam){
     fflush(stdin);
 }
 
-int buscarNombre(const char* nombre){
+int Kiosco::buscarCodigo(const char* codigo) {
     Kiosco kiosco;
-    FILE *pKiosco;
-    pKiosco=fopen("kiosco.dat", "rb");
-    int pos=0;
-    if(pKiosco==NULL){
+    FILE* pKiosco;
+    pKiosco = fopen("kiosco.dat", "rb");
+    int pos = 0;
+    if (pKiosco == NULL) {
         return -2;
     }
-    while(fread(&kiosco,sizeof kiosco,1,pKiosco)==1){
-        if(nombre==kiosco._nombre){
+    while (fread(&kiosco, sizeof(Kiosco), 1, pKiosco) == 1) {
+        if (strcmp(codigo, kiosco._codigo) == 0) {
             fclose(pKiosco);
             return pos;
         }

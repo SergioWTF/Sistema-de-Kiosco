@@ -7,17 +7,18 @@ class Kiosco
     public:
         Kiosco();
         bool crear();
-        bool modificar(Kiosco kiosco, int pos);
+        bool modificar(const char* codigoKiosco);
         bool listar();
         bool listarPorNombre(const char* nombre);
-        void eliminar();
+        bool eliminar(const char* codigoKiosco);
         void cargar();
         void mostrar();
         void cargarCadena(char *palabra, int tam);
-        int buscarNombre(const char* nombre);
+        int buscarCodigo(const char* codigo);
 
         char _nombre[30];
         char _direccion[30];
+        char _codigo[30];
 
     protected:
 

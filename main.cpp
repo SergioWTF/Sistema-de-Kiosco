@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
     Kiosco kiosco;
-    string nombreKiosco;
+    string nombreKiosco,codigoKiosco;
     int opcion;
 
     do
@@ -19,6 +19,7 @@ int main()
         cout << "2-Mostrar Kioscos" << endl;
         cout << "3-Listar kiosco por nombre" << endl;
         cout << "4-Modificar Kiosco" << endl;
+        cout << "5-Eliminar Kiosco" << endl;
         cout << "0-Terminar programa" << endl;
         cout << "----" << endl;
         cout << "Seleccionar una opcion: ";
@@ -50,10 +51,23 @@ int main()
             break;
          case 4:
             system("cls");
-            cout<<"Ingrese nombre de kiosco a modificar: "<<endl;
+            cout << "Ingrese codigo de kiosco a modificar: " << endl;
             cin.ignore();
-            getline(cin, nombreKiosco);
-            //kiosco.modificar();
+            getline(cin, codigoKiosco);
+            if (kiosco.modificar(codigoKiosco.c_str())) {
+                cout << "Kiosco modificado correctamente." << endl;
+            } else {
+                cout << "Error al modificar el kiosco." << endl;
+            }
+            system("pause");
+            system("cls");
+            break;
+        case 5:
+            system("cls");
+            cout << "Ingrese codigo de kiosco a eliminar: " << endl;
+            cin.ignore();
+            getline(cin, codigoKiosco);
+            kiosco.eliminar(codigoKiosco.c_str());
             system("pause");
             system("cls");
             break;

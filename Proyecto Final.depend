@@ -1,14 +1,14 @@
 # depslib dependency file v1.0
-1698364104 source:d:\facultad\laboratorio ii\proyecto final\kiosco.cpp
+1698782803 source:d:\facultad\laboratorio ii\proyecto final\kiosco.cpp
 	<iostream>
 	<cstdlib>
 	<ctime>
 	<cstring>
 	"Kiosco.h"
 
-1698363696 d:\facultad\laboratorio ii\proyecto final\kiosco.h
+1698782454 d:\facultad\laboratorio ii\proyecto final\kiosco.h
 
-1698363957 source:d:\facultad\laboratorio ii\proyecto final\main.cpp
+1698782559 source:d:\facultad\laboratorio ii\proyecto final\main.cpp
 	<iostream>
 	"Kiosco.h"
 
